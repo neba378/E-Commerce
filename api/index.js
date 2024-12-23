@@ -4,6 +4,7 @@ const app = express()
 const products = require("./data/Products")
 const mongoose  = require("mongoose")
 const databaseSeeder = require('./databaseSeeder')
+const userRoute = require("./routes/User")
 
 dotenv.config()
 const PORT = process.env.PORT
@@ -12,10 +13,12 @@ mongoose.connect(MONGO_URI).then(()=>console.log("db connected")).then((err)=>{e
 
 
 
-
+app.use(express.json())
 // db seeder router
 
 app.use('/api/seed', databaseSeeder)
+
+app.use('/api/users/', userRoute)
 app.listen(PORT || 9000, ()=>{
     console.log(`Server Running on port ${PORT}`)
 })
