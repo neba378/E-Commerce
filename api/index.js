@@ -5,6 +5,7 @@ const products = require("./data/Products")
 const mongoose  = require("mongoose")
 const databaseSeeder = require('./databaseSeeder')
 const userRoute = require("./routes/User")
+const productRoute = require("./routes/Product");
 
 dotenv.config()
 const PORT = process.env.PORT
@@ -19,6 +20,8 @@ app.use(express.json())
 app.use('/api/seed', databaseSeeder)
 
 app.use('/api/users/', userRoute)
+
+app.use("/api/products/", productRoute);
 app.listen(PORT || 9000, ()=>{
     console.log(`Server Running on port ${PORT}`)
 })
